@@ -484,6 +484,13 @@ public class FCMService extends FirebaseMessagingService implements PushConstant
     /*
      *  Priority Notification
      */
+
+    boolean forceHeadsUp = prefs.getBoolean(FORCE_HEADS_UP, true);
+
+    if (forceHeadsUp) {
+      extras.putString(PRIORITY, Integer.toString(NotificationCompat.PRIORITY_MAX));
+    }
+
     setNotificationPriority(extras, mBuilder);
 
     /*
