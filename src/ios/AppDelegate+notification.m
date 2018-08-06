@@ -197,6 +197,13 @@ NSString *const pushPluginApplicationDidBecomeActiveNotification = @"pushPluginA
     pushHandler.isInline = YES;
     [pushHandler notificationReceived];
 
+    if (pushHandler.forceShow) {
+        completionHandler(UNNotificationPresentationOptionAlert |
+                          UNNotificationPresentationOptionBadge |
+                          UNNotificationPresentationOptionSound);
+        return;
+    }
+
     completionHandler(UNNotificationPresentationOptionNone);
 }
 

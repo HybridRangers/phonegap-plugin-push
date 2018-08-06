@@ -42,6 +42,7 @@
 @synthesize notificationCallbackId;
 @synthesize callback;
 @synthesize clearBadge;
+@synthesize forceShow;
 @synthesize handlerObj;
 
 @synthesize usesFCM;
@@ -203,7 +204,8 @@
             id soundArg = [iosOptions objectForKey:@"sound"];
             id alertArg = [iosOptions objectForKey:@"alert"];
             id clearBadgeArg = [iosOptions objectForKey:@"clearBadge"];
-            
+            id forceShowArg = [iosOptions objectForKey:@"forceShow"];
+
             if (([badgeArg isKindOfClass:[NSString class]] && [badgeArg isEqualToString:@"true"]) || [badgeArg boolValue])
             {
                 authorizationOptions |= UNAuthorizationOptionBadge;
@@ -228,9 +230,16 @@
                 [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
             }
             NSLog(@"PushPlugin.register: clear badge is set to %d", clearBadge);
-            
+
+            if([forceShowArg isKindOfClass:[NSString class]]) {
+                NSLog(@"PushPlugin.register: forceTrue should be a boolean.");
+            } else {
+                forceShow = [forceShowArg boolValue];
+                NSLog(@"PushPlugin.register: forceTrue is set to %d", forceShow);
+            }
+
             isInline = NO;
-            
+
             NSLog(@"PushPlugin.register: better button setup");
             // setup action buttons
             NSMutableSet<UNNotificationCategory *> *categories = [[NSMutableSet alloc] init];
