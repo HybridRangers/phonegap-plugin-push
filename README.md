@@ -2,6 +2,13 @@
 
 > Register and receive push notifications
 
+# Fork Changes
+This fork includes the following changes:
+* Removed cordova-android 7.1.0 version requirement to allow this plugin to be used with the PhoneGap Build service.
+* Added functionality to show push notifications in the foreground on iOS using the `forceShow` option.
+* Added functionality to show heads up notifications on Android using the `forceHeadsUp` option. This only applies to Android versions between 5.0 and 7.0 and is achieved by changing the priority of notifications to urgent. You can achieve the same on Android 8.0 by creating a channel and setting its priority (called importance in the documentation) to the highest value.
+* Updated notification id on Android so that multiple notifications are possible.
+
 # Warning
 
 The links below take you to the version 2.x documentation which includes a
