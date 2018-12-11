@@ -481,6 +481,15 @@
                         [additionalData setObject:value forKey:key];
                     }
                 }
+            } else if ([key isEqualToString:@"actionCallback"]) {
+                /*
+                    For unknown reasons the actionCallback key causes the notification event to not be triggered. The
+                    key only seems to be included if the user interacts with notification when the app is in the
+                    foreground.
+
+                    https://github.com/phonegap/phonegap-plugin-push/issues/2608
+                */
+                break;
             } else {
                 [additionalData setObject:[notificationMessage objectForKey:key] forKey:key];
             }
